@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 透明单例模式
+    var CreateDiv = (function(){ 
+        var instance; 
+        class CreateDivInside{
+            constructor( html ){ 
+                if ( instance ){ 
+                    return instance; 
+                } 
+                this.html = html; 
+                this.init(); 
+                return instance = this; 
+            }
+            init(){ 
+                var div = document.createElement( 'div' ); 
+                div.innerHTML = this.html; 
+                document.body.appendChild( div ); 
+            }; 
+        }
+        return CreateDivInside; 
+    })(); 
+    var a = new CreateDiv( 'sven1' ); 
+    var b = new CreateDiv( 'sven2' ); 
+    alert ( a === b ); // true
+    // 代理模式
+</script>
+</html>

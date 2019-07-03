@@ -4,3 +4,5 @@ function new(func){
     func.call(newObj);
     return newObj;
 }
+
+    

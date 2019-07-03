@@ -100,3 +100,42 @@ function getRandomArbitrary(min, max) {
   
 
 }
+
+
+var test=/^0[0-9]:[0-5][0-9]|1[0-9]:[0-5][0-9]|2[0-3]:[0-5][0-9]$/
+console.log(test.test("23:29"))
+
+var test2=/^[01][0-9]:[0-5][0-9]|2[0-3]:[0-5][0-9]$/
+console.log(test2.test("23:29"))
+
+var test3=/^([01][0-9]|2[0-3]):[0-5][0-9]$/
+console.log(test3.test("23:29"))
+
+
+// . 任何字符出现一次或多次后面紧跟着一个数字
+var regex = /(?=.*[0-9])^[0-9A-Za-z]{6,12}$/;
+console.log(regex.test("aaaaaa"))
+
+// 一个数字
+var regex = /(?=[0-9])^[0-9A-Za-z]{6,12}$/;
+console.log(regex.test("aaaaaa"))
+
+// 一个数字或多个数字
+var regex = /(?=[0-9]+)^[0-9A-Za-z]{6,12}$/;
+console.log(regex.test("aaaaaa"))
+
+var regex = /(?!.*[0-9])^[0-9A-Za-z]{6,12}$/;
+console.log(regex.test("aaaaaa"))
+
+
+
+
+
+
+
+var result = "hello".replace(/(?!l)^/g, '#');
+console.log(result);
+
+var result = "hello".replace(/(?=l)/g, '#');
+console.log(result);
+
