@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var salesOffices = {};
+        salesOffices.clientList = []; 
+        salesOffices.listen = function( fn ){
+            this.clientList.push( fn ); 
+        }; 
+        salesOffices.trigger = function(){ // 发布消息
+            for( var i = 0, fn; fn = this.clientList[ i++ ]; ){ 
+                fn.apply( this, arguments ); 
+            } 
+        }; 
+        salesOffices.listen( function( price, squareMeter ){ // a订阅消息
+            console.log( 'a'); 
+            console.log( 'squareMeter= ' + squareMeter +'价格= ' + price ); 
+        }); 
+        salesOffices.listen( function( price, squareMeter ){ // b订阅消息
+            console.log( 'b'); 
+            console.log( 'squareMeter= ' + squareMeter +'价格= ' + price );
+        }); 
+        salesOffices.trigger( 2000000, 88 ); 
+        salesOffices.trigger( 3000000, 110 ); 
+    </script>
+</body>
+</html>
