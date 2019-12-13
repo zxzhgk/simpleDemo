@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			div{
+				width: 100px;
+				height: 100px;
+				background: #000;
+				margin-bottom: 10px;
+			}
+			.demo{
+				transition: margin-left 3s;
+			}
+			/* .demo:hover{
+				margin-left:300px;
+			} */
+			.active1{
+				margin-left:1000px;
+			}
+			.active2{
+				transform:translateX(1000px);
+			}
+			.demo2{
+				transition: transform 3s;
+			}
+			/* .demo2:hover{
+				transform:translateX(300px);
+			} */
+		</style>
+	</head>
+	<body>
+		<div class="demo">1</div>
+		<div class="demo2">2</div>
+		<script type="text/javascript">
+			let demo=document.querySelector(".demo");
+			demo.onclick=function(){
+				// 执行时间 60ms
+				this.setAttribute("class","demo active1")
+			}
+			let demo2=document.querySelector(".demo2");
+			demo2.onclick=function(){
+				// 执行时间 6ms
+				this.setAttribute("class","demo2 active2")
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>DOM,特性，属性之间的关系</title>
+	</head>
+	<body>
+		<!-- <input type="text" class="form-control" name="minBarCode" id="minBarCode"  maxlength="6" minlength="6" onblur="test(this)"> -->
+		<input type="text" class="form-control" name="minBarCode" id="minBarCode"  maxlength="6" minlength="6"  onblur="/^(LC\d{3}[1-9])$/g.test(value) ? value : value=''">
+		<input type="text" value="1111" />
+	</body>
+	<script>
+		function test(e){
+			if(!/^(LC\d{3}[1-9])$/g.test(e.value)){
+				e.value="";
+			}
+		}
+		//
+		// 1. 特性和属性修改都会导致DOM更新
+		// 2. 特性修改的值会同步到DOM和属性，但是，当中间有通过属性修改值后再次通过特性修改值时将不再同步DOM和属性值
+		// 3. DOM（用户操作）表单元素的value 只会同步到属性，不会同步到特性
+		var oinput=document.querySelector("input")
+		// oinput.setAttribute("value","333");
+		// oinput.value
+		// oinput.value="222"
+		// oinput.setAttribute("value","444"); 此时修改特性值将不同步属性和DOM;只影响 attributes 对象
+		// setAttribute 修改的值会同步到DOM和属性；但是当通过oinput.value="222" 赋值过一次后，再次通过 setAttribute 修改值时将不再同步DOM和属性值;
+	</script>
+</html>
