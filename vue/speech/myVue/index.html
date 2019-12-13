@@ -6,8 +6,9 @@
 </head>
 <body>
 <div id="app">
+	{{message.age}}
     <input type="text" v-model="message.msg">
-    <div>{{message.msg}}</div>
+	{{message.msg}}
 </div>
 <!-- 简易版本VUE
 	1.实现一个监听器Oberver，用来劫持并监听所有属性，通过依赖收集器Dep来收集相关的依赖的观察者；
@@ -21,14 +22,12 @@
 <script src="compile.js"></script>
 <script src="Vue.js"></script>
 <script>
-    //我们的数据一般挂载在vm上
-    //Object.defineproperty get和set
-    //vue中实现双向绑定 1.模板的编译 2.数据劫持 观察数据变化 3.watcher
     let vm=new Vue({
         el:'#app',//document.getElementById('app')
         data:{
             message:{
-				msg:"哈哈"
+				msg:"哈哈",
+				age:12
 			}
 
         },

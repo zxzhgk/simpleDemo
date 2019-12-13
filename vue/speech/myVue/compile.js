@@ -100,19 +100,16 @@ CompileUtil={
     },
 	// v-text 指令的具体处理逻辑
     text(node,vm,expr){
-        console.log();
         let updateFn=this.updater['textUpdater'];
-        //{{message.a}}=>hello,xyy;
-        let value=this.getTextVal(vm,expr);
         //{{a}} {{b}} {{c}}
         expr.replace(/\{\{([^}]+)\}\}/g,(...argumments)=>{
-            new Watcher(vm,argumments[1],()=>{
+            new Watcher(vm,argumments[1],(newValue)=>{
                 // 如果数据变化了，文本节点需要重新获取依赖的属性更新文本中的内容
-                updateFn&&updateFn(node,this.getTextVal(vm,expr));
+                updateFn&&updateFn(node,newValue);
             });
         });
 
-        updateFn&&updateFn(node,value);
+        // updateFn && updateFn(node,value);
     },
     setVal(vm,expr,value){//
         expr=expr.split('.');//[message,a]
@@ -129,9 +126,9 @@ CompileUtil={
         let updateFn=this.updater.modelUpdater;
         // 此处创建观察者;
 		// 将来数据被变更后;通过依赖(dep) 触发观察者的回调函数达到数据更新
-        new Watcher(vm,expr,()=>{
+        new Watcher(vm,expr,(newValue)=>{
         //   当值变化后调用回调函数将新的值更新
-            updateFn && updateFn(node,this.getVal(vm,expr));
+            updateFn && updateFn(node,newValue);
         });
         //绑定事件
         node.addEventListener('input',(e)=>{
@@ -140,7 +137,7 @@ CompileUtil={
             this.setVal(vm,expr,newValue);
         })
 		// 第一次初始时,主动将数据同步给DOM
-        updateFn && updateFn(node,this.getVal(vm,expr));
+        // updateFn && updateFn(node,this.getVal(vm,expr));
     },
     on(node,vm,expr,eventName){
         node.addEventListener(eventName,(e)=>{
@@ -149,12 +146,12 @@ CompileUtil={
     },
     updater:{
         //文本更新
-        textUpdater(node,value){
-            node.textContent=value;
+        textUpdater(node,newValue){
+            node.textContent=newValue;
         },
         //输入框更新
-        modelUpdater(node,value){
-            node.value=value;
+        modelUpdater(node,newValue){
+            node.value=newValue;
         }
     }
 };

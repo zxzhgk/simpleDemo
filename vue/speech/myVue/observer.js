@@ -17,6 +17,7 @@ class Observer {
         let that=this;
 		// 每个属性实例化一个依赖收集实例;
         let dep=new Dep();
+		obj._dep=dep;
         Object.defineProperty(obj,key,{
             enumerable:true,
             configurable:true,
