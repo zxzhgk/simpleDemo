@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试</title>
+</head>
+<body>
+<div id="app">
+	{{message.age}}
+    <input type="text" v-model="message.msg">
+	{{message.msg}}
+</div>
+<!-- 简易版本VUE
+	1.实现一个监听器Oberver，用来劫持并监听所有属性，通过依赖收集器Dep来收集相关的依赖的观察者；
+	2.实现一个观察者Watcher，在属性依赖的地方创建观察者，并把观察者储存在对应属性的依赖收集器里；
+	3.实现一个依赖收集器Dep，用来收集属性的观察者，一个属性的观察者会有多个
+	3.实现一个解析器Compile，用来解析模板（DOM）的相关指令，插值等
+-->
+<script src="dep.js"></script>
+<script src="watcher.js"></script>
+<script src="observer.js"></script>
+<script src="compile.js"></script>
+<script src="Vue.js"></script>
+
+
+<script>
+    let vm=new Vue({
+        el:'#app',//document.getElementById('app')
+        data:{
+            message:{
+				msg:"哈哈",
+				age:12
+			}
+
+        },
+        // computed:{
+        //     getNewName(){
+        //         //  {{getNewName}}
+        //         return this.message.a+"我是computed"
+        //     }
+        // },
+        // methods:{
+        //     change(){
+        //         // <button v-on:click="change">更新操作</button>
+        //         this.message.a='通过methods我改变了'
+        //     }
+        // }
+    })
+</script>
+</body>
+</html>
