@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+		.outer, .middle, .inner1, .inner2 {
+			display:block;
+			width:520px;
+			padding:15px;
+			margin:15px;
+			text-decoration:none;
+		}
+		.outer{
+			border:1px solid red;
+			color:red;
+		}
+		.middle{
+			border:1px solid green;
+			color:green;
+			width:460px;
+		}
+		.inner1, .inner2{
+			border:1px solid purple;
+			color:purple;
+			width:400px;
+		}
+		</style>
+	</head>
+	<body>
+		<div class="outer">
+		    outer, once & none-once
+		    <div class="middle" target="_blank">
+		        middle, capture & none-capture
+		        <a class="inner1" href="https://www.mozilla.org" target="_blank">
+		            inner1, passive & preventDefault(which is not allowed)
+		        </a>
+		        <a class="inner2" href="https://developer.mozilla.org/" target="_blank">
+		            inner2, none-passive & preventDefault(not open new page)
+					
+					<div id="this" style="color: red;" onclick="testOnClickThis(this)">测试this在事件中的指向</div>
+		        </a>
+		    </div>
+		</div>
+		
+	</body>
+	<!-- <script type="text/javascript">
+		setInterval(()=>{
+			alert("hahahahah")
+		},1000)
+	</script> -->
+	<script>
+		let capture = {
+			capture : true
+		};
+		let noneCapture = {
+			capture : false
+		};
+		let once = {
+			once : true
+		};
+		let noneOnce = {
+			once : false
+		};
+		let passive = {
+			passive : true
+		};
+		let nonePassive = {
+			passive : false
+		};
+		
+		// 当使用 addEventListener() 为一个元素注册事件的时候，句柄里的 this 值是该元素的引用。其与传递给句柄的 event 参数的 currentTarget 属性的值一样。
+		// 如果一个事件的属性( 例如. onClick)是指定在一个HTML的元素上的，则这个属性中的JavaScript语句实际上会被包裹在一个处理函数中，
+		// 在这个处理函数中使用this的效果(此时处理函数的this已经是window) 和使用 addEventListener来绑定事件的效果是不一样的
+		// 以下是测试
+		let elementThis= document.getElementById("this");
+		elementThis.addEventListener("click",function(){
+			console.log("addEventListener",this);
+		},noneCapture)
+		function testOnClickThis(that){
+			console.log("onclick",this,that);
+		}
+		
+		
+		
+		let outer  = document.getElementsByClassName('outer') [0];
+		let middle = document.getElementsByClassName('middle')[0];
+		let inner1 = document.getElementsByClassName('inner1')[0];
+		let inner2 = document.getElementsByClassName('inner2')[0];
+	
+		
+		
+		
+		outer.addEventListener('click', onceHandler, once);
+		outer.addEventListener('click', noneOnceHandler, noneOnce);
+		middle.addEventListener('click', captureHandler, capture);
+		middle.addEventListener('click', noneCaptureHandler, noneCapture);
+		inner1.addEventListener('click', passiveHandler, passive);
+		inner2.addEventListener('click', nonePassiveHandler, nonePassive);
+		
+		// 一个元素的事件触发会从父级 capture 为 true 的 第一个元素开始；到达当前元素，然后再逐级冒泡事件到根元素
+	
+		function onceHandler(event)
+		{
+			console.log(event)
+			console.log('事件元素：outer, 是否触发一次：once')
+		}
+		function noneOnceHandler(event)
+		{
+			console.log(event)
+			console.log('事件元素：outer, 是否触发一次：none-once, 事件捕获：default')
+		}
+		function captureHandler(event)
+		{
+			console.log(event)
+			//event.stopImmediatePropagation();
+			console.log('事件元素：middle, 事件捕获：capture');
+		}
+		function noneCaptureHandler(event)
+		{
+			console.log(event)
+			console.log('事件元素：middle, 事件捕获：none-capture,');
+		}
+		function passiveHandler(event)
+		{
+			console.log(event)
+			// Unable to preventDefault inside passive event listener invocation.
+			//在调用passive事件监听器内部不能使用preventDefault
+			try{
+				event.preventDefault();
+			}catch(e){
+				console.log(e)
+			}
+			
+			console.log('事件元素：inner1, passive, open new page');
+		}
+		function nonePassiveHandler(event)
+		{
+			console.log(event)
+			event.preventDefault();
+			//event.stopPropagation();
+			console.log('事件元素：inner2, none-passive, 事件捕获：default, not open new page');
+		}
+	</script>
+</html>
