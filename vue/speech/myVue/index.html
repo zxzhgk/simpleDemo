@@ -6,7 +6,6 @@
 </head>
 <body>
 <div id="app">
-	{{message.age}}
     <input type="text" v-model="message.msg">
 	{{message.msg}}
 </div>
@@ -28,8 +27,8 @@
         el:'#app',//document.getElementById('app')
         data:{
             message:{
-				msg:"哈哈",
-				age:12
+				msg:".",
+				age:""
 			}
         },
         // computed:{
