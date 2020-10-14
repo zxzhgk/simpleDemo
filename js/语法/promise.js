@@ -5,10 +5,7 @@ class MPromise {
       this._value = null
       this.callBackFuncs = []
       this.rejCallBackFuncs = []
-      // 实现方式 1
-      // handle.call(this,this._resolve, this._reject)
-
-      // 实现方式 2
+      
       handle(_resolve,_reject)
       function _resolve(val){
         console.log(_self)
@@ -26,24 +23,6 @@ class MPromise {
             fn()
         })
       }
-  }
-
-  _resolve(val) {
-      console.log(this)
-      if (this._status !== 'PENDDING') return
-      this._status = 'FULLFILLED'
-      this._value = val
-      this.callBackFuncs.forEach(fn => {
-          fn()
-      })
-  }
-
-  _reject() {
-      if (this._status !== 'PENDDING') return
-      this._status = 'REJECTED'
-      this.rejCallBackFuncs.forEach(fn => {
-          fn()
-      })
   }
 
   then(onFulFilled) {
