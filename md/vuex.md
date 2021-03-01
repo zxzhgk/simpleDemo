@@ -1,0 +1,10 @@
+state;
+
+getters;
+
+mutations;
+
+actions;
+
+
+
