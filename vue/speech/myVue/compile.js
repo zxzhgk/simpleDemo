@@ -83,7 +83,7 @@ class Compile{
 	    return name.includes('v-');
 	}
 }
-CompileUtil={
+CompileUtil={   
 	// 从vm.$data 中根据 expr (类似属性:a.b.c) 取值
     getVal(vm,expr){
         expr=expr.split('.');//[message,a]

@@ -31,7 +31,6 @@ plane=new Atom(plane);
 plane.fire()
 
 // js 模式
-
 let Plane={
 	fire(){
 		console.log("ptzd")

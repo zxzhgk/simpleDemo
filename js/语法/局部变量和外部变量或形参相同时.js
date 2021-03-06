@@ -54,6 +54,14 @@ function f1(a) {
 f1(10)
 // 参考链接  https://segmentfault.com/q/1010000007278354   
 
+let a=[{a:"ccc"}];
+function c(a){
+a=[];
+
+}
+c()
+console.log(a)
+
 
 
 
