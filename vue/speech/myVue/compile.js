@@ -103,6 +103,7 @@ CompileUtil={
         let updateFn=this.updater['textUpdater'];
         //{{a}} {{b}} {{c}}
         expr.replace(/\{\{([^}]+)\}\}/g,(...argumments)=>{
+            console.log("argumments[1]",argumments[1])
             new Watcher(vm,argumments[1],(newValue)=>{
                 // 如果数据变化了，文本节点需要重新获取依赖的属性更新文本中的内容
                 updateFn&&updateFn(node,newValue);
