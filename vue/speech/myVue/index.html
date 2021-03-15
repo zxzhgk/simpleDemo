@@ -6,8 +6,14 @@
 </head>
 <body>
 <div id="app">
+<<<<<<< HEAD
+=======
     <input type="text" v-model="message.msg">
+>>>>>>> 67b0fbc426345639dc7a438c578f3b2133db2bf0
 	{{message.msg}}
+	<div v-on:click="testClick">
+		点我
+	</div>
 </div>
 <!-- 简易版本VUE
 	1.实现一个监听器Oberver，用来劫持并监听所有属性，通过依赖收集器Dep来收集相关的依赖的观察者；
@@ -37,12 +43,12 @@
         //         return this.message.a+"我是computed"
         //     }
         // },
-        // methods:{
-        //     change(){
-        //         // <button v-on:click="change">更新操作</button>
-        //         this.message.a='通过methods我改变了'
-        //     }
-        // }
+        methods:{
+            testClick(){
+                // <button v-on:click="change">更新操作</button>
+                this.message.msg='通过methods我改变了'
+            }
+        }
     })
 </script>
 </body>

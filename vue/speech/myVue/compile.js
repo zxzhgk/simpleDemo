@@ -45,10 +45,10 @@ class Compile{
 				//type 为model text for if....
                 let [,type]=attrName.split('-');
 				// 执行对不同 type 的处理
-                CompileUtil[type](node,this.vm,expr);
-            //    事件的绑定 用下面这个v-on
-            //     let [directiveName,eventName]=type.split(':');
-            //     CompileUtil[directiveName](node,this.vm,expr,eventName);
+                CompileUtil[type] && CompileUtil[type](node,this.vm,expr);
+                // 事件的绑定 用下面这个v-on
+                let [directiveName,eventName]=type.split(':');
+                CompileUtil[directiveName](node,this.vm,expr,eventName);
             }
         })
     };
@@ -101,7 +101,7 @@ CompileUtil={
 	// v-text 指令的具体处理逻辑
     text(node,vm,expr){
         let updateFn=this.updater['textUpdater'];
-        //{{a}} {{b}} {{c}}
+        //{{a}} {{b}} {{c}} 
         expr.replace(/\{\{([^}]+)\}\}/g,(...argumments)=>{
             console.log("argumments[1]",argumments[1])
             new Watcher(vm,argumments[1],(newValue)=>{
